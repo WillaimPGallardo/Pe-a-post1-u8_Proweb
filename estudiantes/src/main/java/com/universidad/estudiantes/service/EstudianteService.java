@@ -10,28 +10,28 @@ import java.util.List;
 @Service
 public class EstudianteService {
 
-    private final EstudianteRepository repo;
+    private final EstudianteRepository repository;
 
-    public EstudianteService(EstudianteRepository repo) {
-        this.repo = repo;
+    public EstudianteService(EstudianteRepository repository) {
+        this.repository = repository;
     }
 
     public List<Estudiante> listarTodos() {
-        return repo.findAll();
+        return repository.findAll();
     }
 
     public Estudiante buscarPorId(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("No encontrado"));
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
     }
 
     @Transactional
-    public Estudiante guardar(Estudiante e) {
-        return repo.save(e);
+    public Estudiante guardar(Estudiante estudiante) {
+        return repository.save(estudiante);
     }
 
     @Transactional
     public void eliminar(Long id) {
-        repo.deleteById(id);
+        repository.deleteById(id);
     }
 }
